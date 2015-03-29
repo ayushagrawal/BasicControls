@@ -3,9 +3,10 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "lcd.h"
-const int Distance=200;   //In cms .This is the distance the bot travels out of the arena to throw the object
+const int Distance=200;                          //In cms .This is the distance the bot travels out of the arena to throw the object
 const int ProximitySensorTransitionValue=120;
 const int WhiteLineTransitionValue=   ;
+unsigned char i;                                 //to store received data from UDR1
 void init_devices(void)
 {
 	motor_pin_config();
@@ -209,7 +210,6 @@ int main(void)
 	velocity_control(255,255);
 	while(1)
 	{
-		char i;
 		//command for capturing the image to be sent through Xbee
 		//Image processing
 		//Will be having an integer i as an output from the processed program
