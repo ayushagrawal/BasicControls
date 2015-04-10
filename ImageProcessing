@@ -1,0 +1,58 @@
+#include "opencv2/highgui/highgui.hpp"
+#include <iostream>
+#include<math.h>
+#include "cv.h"
+#include "highgui.h"
+#include <stdio.h>
+using namespace cv;
+using namespace std;
+int process()
+{
+	CvCapture* capture = cvCaptureFromCAM( CV_CAP_ANY );
+    	if ( !capture ) {
+        	fprintf( stderr, "ERROR: capture is NULL \n" );
+        	getchar();
+        	return -1;
+                     }
+	IplImage* frame = cvQueryFrame( capture );
+        if ( !frame ) {
+           	fprintf( stderr, "ERROR: frame is null...\n" );
+            	getchar();
+            	return -1;
+        }
+	IplImage* img= cvCreateImage(size, IPL_DEPTH_16S, 1);
+            img = frame;
+	cvReleaseCapture( &capture );
+	const int row=img.rows;						//image processing starts
+	const int col=img.cols;
+	int r[row][col],flag=0;
+
+	for(int i = (img.row)/3; i <2*(img.rows)/3; i++)
+	{
+    		for(int j = col/3; j < 2*col/3; j++)
+   		 {
+        		 r[i][j] = img.at<cv::Vec3b>(i,j)[2];
+         		if(r>150&&r<255)
+	  		  flag++;
+
+  		  }
+	}
+	if (flag>(row*col/36))
+	return 1;
+	else
+	return 0;						//image processing ends
+
+}
+int main( int argc, const char** argv )
+{
+	 while(1)
+	{
+		int a=process();
+		if (a==1)
+			{//create required file for xbee}
+		else if (a==0)
+			{//create aapropriate file for xbee}
+		else if (a==-1)
+			{cout<<"camera not working";}
+}
+
