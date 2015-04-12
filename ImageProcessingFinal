@@ -6,90 +6,100 @@
 #include <stdio.h>
 using namespace cv;
 using namespace std;
-	bool compare(Mat img1, Mat img2)
-	{
-        int flag=0,row=1000,col=2000;
-        int row1=(img1).rows;
-        int col1=(img1).cols;
-        int row2=(img2).rows;
-        int col2=(img2).cols;
-        if(row1<=row2)
-        row=row1;
-        else
-        row=row2;
-        if(col1<=col2)
-        col=col1;
-        else
-        col=col2;
-        for(int i=0;i<row;i++)
-        {
-            for(int j=0;j<col;j++)
-            {
-                if(abs((img1.at<cv::Vec3b>(i,j)[2])-(img2.at<cv::Vec3b>(i,j)[2]))>10)         //10 is arbit
-                flag++;
-            }
-        }
-        if(flag<20)         //20 is arbit
-        return true;
-	}
-	int ImgProcessing(Mat img)          //doubt-can we pass mat type like this or pointers are required
-	{
-        int row=(img).rows;						//image processing starts
-        int col=(img).cols;
-        int r[row][col],flag1=0;
-	    Mat image(img);                     //dont know why it is here; copied from pry
-        for(int i = row/3; i <2*row/3; i++)
-        {
-    		for(int j = col/3; j < 2*col/3; j++)
-   		  {
-        		 r[i][j] = image.at<cv::Vec3b>(i,j)[2];
-         		if(r[i][j]>150&&r[i][j]<255)
-	  		  flag1++;
-
-  		  }
-        }
-        if (flag1>(row*col/36))
-        return 1;
-        else
-        return 0;						//image processing ends
-	}
-	int main( int argc, const char** argv )
-    {
-        CvCapture* capture = cvCaptureFromCAM(2);
-    	if ( !capture )
-    	 {
-        	fprintf( stderr, "ERROR: capture is NULL \n" );
-        	getchar();
-        	return -1;
-            }
-	Mat frame1 = cvQueryFrame( capture );
-	Mat img1= cvCreateImage(cvSize(1000,1000), IPL_DEPTH_16S, 2);       //dont know why this is used(ayush modified something)
-            img1 = frame1;
-            cv::waitKey(500);
-    Mat frame2 = cvQueryFrame( capture );
-	Mat img2= cvCreateImage(cvSize(1000,1000), IPL_DEPTH_16S, 2);
-             img2 = frame2;
-	cvReleaseCapture( &capture );
-      while(1)
-      {
-        cv::waitKey(700);
-        CvCapture* capture = cvCaptureFromCAM(2);
-    	if ( !capture )
-    	 {
-        	fprintf( stderr, "ERROR: capture is NULL \n" );
-        	getchar();
-        	return -1;
-        }
-        Mat frame3 = cvQueryFrame( capture );
-       Mat img3= cvCreateImage(cvSize(1000,1000), IPL_DEPTH_16S, 2);
-       img3 = frame3;
-        cvReleaseCapture( &capture );
-        img1=img2;
-        img2=img3;
-        if(compare(img1,img2))
-        {
-            int a=ImgProcessing(img2);          //give value of a to xbee
-            cout<<a;
-        }
-      }
-    }
+bool compare(Mat img1, Mat img2)
+{
+int flag=0,row=1000,col=2000;
+int row1=(img1).rows;
+int col1=(img1).cols;
+int row2=(img2).rows;
+int col2=(img2).cols;
+if(row1<=row2)
+row=row1;
+else
+row=row2;
+if(col1<=col2)
+col=col1;
+else
+col=col2;
+const int rows=row;
+const int cols=col;
+int r1[rows][cols];
+int r2[rows][cols];
+/*for(int i=0;i<row;i++)
+{
+for(int j=0;j<col;j++)
+{
+r1[i][j]=img2.at<cv::Vec3b>(i,j)[2];
+r2[i][j]=img2.at<cv::Vec3b>(i,j)[2];
+if(abs(r1[i][j]-r2[i][j])>10) //10 is arbit
+flag++;
+}
+}*/
+cout<<" HEloo"<<endl;
+if(flag<20) //20 is arbit
+return true;
+else 
+return false;
+}
+int ImgProcessing(Mat img) //doubt-can we pass mat type like this or pointers are required
+{
+cvNamedWindow( "mywindow", CV_WINDOW_AUTOSIZE );
+imshow( "mywindow", img );
+const int row=(img).rows; //image processing starts
+const int col=(img).cols;
+int r[row][col],flag1=0;
+Mat image(img); //dont know why it is here; copied from pry
+for(int i = row/3; i <2*row/3; i++)
+{
+for(int j = col/3; j < 2*col/3; j++)
+{
+r[i][j] = image.at<cv::Vec3b>(i,j)[2];
+if(r[i][j]>150&&r[i][j]<255)
+flag1++;
+}
+}
+if (flag1>(row*col/36))
+return 1;
+else
+return 0; //image processing ends
+}
+int main( int argc, const char** argv )
+{
+CvCapture* capture = cvCaptureFromCAM( CV_CAP_ANY );
+if ( !capture )
+{
+fprintf( stderr, "ERROR: capture is NULL \n" );
+getchar();
+return -1;
+}
+Mat frame1 = cvQueryFrame( capture );
+Mat img1= cvCreateImage(cvSize(1000,1000), IPL_DEPTH_16S, 2); //dont know why this is used(ayush modified something)
+img1 = frame1;
+cv::waitKey(1500);
+Mat frame2 = cvQueryFrame( capture );
+Mat img2= cvCreateImage(cvSize(1000,1000), IPL_DEPTH_16S, 2);
+img2 = frame2;
+cvReleaseCapture( &capture );
+while(1)
+{
+cv::waitKey(1500);
+CvCapture* capture = cvCaptureFromCAM( CV_CAP_ANY );
+if ( !capture )
+{
+fprintf( stderr, "ERROR: capture is NULL \n" );
+getchar();
+return -1;
+}
+Mat frame3 = cvQueryFrame( capture );
+Mat img3 = cvCreateImage(cvSize(1000,1000), IPL_DEPTH_16S, 2);
+img3 = frame3;
+cvReleaseCapture( &capture );
+img1=img2;
+img2=img3;
+if(compare(img1,img2)==1)
+{
+int a=ImgProcessing(img2); //give value of a to xbee
+cout<<a;
+}
+}
+}
