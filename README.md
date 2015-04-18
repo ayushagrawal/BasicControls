@@ -1,5 +1,5 @@
 
-2014-cs101                                           
+2014-CS101                                           
 TEAM ID 406                                                                         
 TEAM MEMBERS:                            
    Ayush Agrawal      14d070042                                
@@ -37,8 +37,11 @@ SL-Serial Number Low
 11.Connect the Receiver XBee module to the Fire Bird V robot.Load the hex file from xbee_testing_verification_code/default   folder in xbee_module_testing folder.Connect the Transmitter XBee module to PC using XBee adapter.Connect the Fire Bird to PC using USB cable.                                           
 12.Now,the two XBee's are configured to communicate with each other.their communication can be verified by:
                       
-      i.open two X-CTU applications. X-CTU window must show the two Serial Ports for Transmitter XBee module and Fire Bird V.       ii.Now to see the output, open the terminal window in both X-CTU. Type something in window, which gets reflected back in other. The transmitted data appears in blue while the received data appears in red.
-      iii.the XBee modules are configured to communicate with each other. Now you are ready to proceed with the future tasks. 13.Open the Codeblocks and open the given code.Now, compile the code.       
-14.Your bot is now ready to eliminate the red blocks from the arena.
+      i.open two X-CTU applications. X-CTU window must show the two Serial Ports for Transmitter XBee module and Fire Bird V.       ii.Now to see the output, open the terminal window in both X-CTU. Type something in window, which gets reflected back           in other. The transmitted data appears in blue while the received data appears in red.
+      iii.the XBee modules are configured to communicate with each other. Now you are ready to proceed with the future tasks. 13.Open the Codeblocks and open the given code.
+14.Now add the two files given as '.h files for image processing' to the place where code is saved.
+15.Similarly the program needed to be written on the bot must be first opened in Atmel Studio. Now add the file given as '.h    file for Firebird' to the place where the file is saved under the folder of it's name.
+16.Now load the program onto the bot using AVR Bootloader.
+17.And now your bot is now ready to eliminate the red blocks from the arena.
                              
    Youtube Link to video of project:
