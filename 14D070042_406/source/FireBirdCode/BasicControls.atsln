@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "BasicControls", "BasicControls\BasicControls.cproj", "{0C6C5097-5438-4860-AC98-C0256F669B09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C6C5097-5438-4860-AC98-C0256F669B09}.Debug|AVR.ActiveCfg = Debug|AVR
+		{0C6C5097-5438-4860-AC98-C0256F669B09}.Debug|AVR.Build.0 = Debug|AVR
+		{0C6C5097-5438-4860-AC98-C0256F669B09}.Release|AVR.ActiveCfg = Release|AVR
+		{0C6C5097-5438-4860-AC98-C0256F669B09}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
